@@ -21,7 +21,8 @@ module "codebuild_frontend" {
         "s3:PutObject"
       ]
       resources = [
-        "arn:aws:s3:::${module.s3_bucket.bucket_name}/*"
+        "arn:aws:s3:::${module.s3_bucket.bucket_name}/*",
+        "arn:aws:s3:::${module.s3_bucket.bucket_name}"
       ]
     }
   ]
