@@ -48,3 +48,16 @@ data "aws_iam_policy_document" "main" {
     effect = "Allow"
   }
 }
+
+data "aws_iam_policy_document" "additional" {
+  count = length(var.additional_permissions) > 0 ? 1 : 0
+
+  dynamic "statement" {
+    for_each = var.additional_permissions
+    content {
+      effect    = statement.value.effect
+      actions   = statement.value.actions
+      resources = statement.value.resources
+    }
+  }
+}

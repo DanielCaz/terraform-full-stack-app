@@ -49,8 +49,17 @@ resource "aws_iam_role" "main" {
       },
     ]
   })
+
   inline_policy {
     name   = "codebuild-${var.region}-${var.name}"
     policy = data.aws_iam_policy_document.main.json
+  }
+
+  dynamic "inline_policy" {
+    for_each = data.aws_iam_policy_document.additional
+    content {
+      name   = "codebuild-${var.region}-${var.name}-additional-permissions"
+      policy = inline_policy.value.json
+    }
   }
 }

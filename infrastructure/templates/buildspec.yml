@@ -10,6 +10,7 @@ phases:
       - bun install
   build:
     commands:
-      - echo "Building the frontend in $PWD"
       - bun run build
-      - aws s3 sync --delete ./build s3://$BUCKET_NAME
+  post_build:
+    commands:
+      - aws s3 sync --delete ./dist s3://$BUCKET_NAME

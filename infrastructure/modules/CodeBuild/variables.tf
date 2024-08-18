@@ -29,3 +29,15 @@ variable "environment_variables" {
 
   default = {}
 }
+
+variable "additional_permissions" {
+  type = list(object({
+    effect    = string
+    actions   = list(string)
+    resources = list(string)
+  }))
+
+  description = "Additional permissions to attach to the CodeBuild project"
+
+  default = []
+}

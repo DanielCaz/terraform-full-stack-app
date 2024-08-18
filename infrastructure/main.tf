@@ -9,6 +9,22 @@ module "codebuild_frontend" {
   environment_variables = {
     BUCKET_NAME = module.s3_bucket.bucket_name
   }
+
+  additional_permissions = [
+    {
+      effect = "Allow"
+      actions = [
+        "s3:DeleteObject",
+        "s3:GetBucketLocation",
+        "s3:GetObject",
+        "s3:ListBucket",
+        "s3:PutObject"
+      ]
+      resources = [
+        "arn:aws:s3:::${module.s3_bucket.bucket_name}/*"
+      ]
+    }
+  ]
 }
 
 module "codepipeline" {
