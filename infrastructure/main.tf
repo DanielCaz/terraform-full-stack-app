@@ -26,5 +26,5 @@ module "codepipeline" {
 module "s3_bucket" {
   source = "./modules/S3_Website"
 
-  name = "${var.project_name}-bucket"
+  name = "${var.project_name}-website-bucket"
 }

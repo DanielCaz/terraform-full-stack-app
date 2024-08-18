@@ -25,6 +25,8 @@ resource "aws_s3_bucket_policy" "main" {
       },
     ]
   })
+
+  depends_on = [aws_s3_bucket_public_access_block.main]
 }
 
 resource "aws_s3_bucket_website_configuration" "main" {
