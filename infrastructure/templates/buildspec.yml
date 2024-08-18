@@ -6,8 +6,10 @@ phases:
       - curl -fsSL https://bun.sh/install | bash
       - export BUN_INSTALL="$HOME/.bun"
       - export PATH="$BUN_INSTALL/bin:$PATH"
+      - cd ./frontend
+      - bun install
   build:
     commands:
-      - cd ./frontend
+      - echo "Building the frontend in $PWD"
       - bun run build
       - aws s3 sync --delete ./build s3://$BUCKET_NAME
