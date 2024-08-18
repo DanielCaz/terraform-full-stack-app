@@ -21,3 +21,11 @@ variable "codepipeline_artifact_bucket" {
 
   description = "The name of the S3 bucket where the pipeline artifacts are stored"
 }
+
+variable "environment_variables" {
+  type = map(string)
+
+  description = "The environment variables to pass to the CodeBuild project"
+
+  default = {}
+}

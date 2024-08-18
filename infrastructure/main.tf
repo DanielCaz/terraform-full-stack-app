@@ -5,6 +5,10 @@ module "codebuild_frontend" {
   region                       = var.region
   buildspec_path               = "./infrastructure/templates/buildspec.yml"
   codepipeline_artifact_bucket = module.codepipeline.bucket_name
+
+  environment_variables = {
+    BUCKET_NAME = module.s3_bucket.bucket_name
+  }
 }
 
 module "codepipeline" {
@@ -17,4 +21,10 @@ module "codepipeline" {
     id     = "DanielCaz/terraform-full-stack-app"
     branch = "main"
   }
+}
+
+module "s3_bucket" {
+  source = "./modules/S3_Website"
+
+  name = "${var.project_name}-bucket"
 }
